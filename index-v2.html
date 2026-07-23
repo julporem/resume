@@ -27,8 +27,6 @@
     margin: 0 auto;
     padding: 48px 24px 80px;
   }
-
-  /* Header / hero */
   header.hero {
     display: flex;
     align-items: center;
@@ -86,8 +84,6 @@
   }
   .contact a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
   .contact a:hover { border-bottom-color: var(--accent); color: var(--accent); }
-
-  /* Stats strip */
   .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -116,7 +112,6 @@
     margin-top: 4px;
     display: block;
   }
-
   section { margin-bottom: 36px; }
   h2 {
     font-size: 13px;
@@ -128,7 +123,6 @@
     border-left: 4px solid var(--accent);
   }
   .summary { font-size: 16px; }
-
   .entry { margin-bottom: 20px; position: relative; padding-left: 0; }
   .entry:last-child { margin-bottom: 0; }
   .entry-title {
@@ -153,7 +147,6 @@
   }
   ul.bullets { margin: 8px 0 0; padding-left: 20px; }
   ul.bullets li { margin-bottom: 5px; font-size: 15px; }
-
   blockquote {
     margin: 14px 0 0;
     padding: 12px 18px;
@@ -171,7 +164,6 @@
     font-size: 12.5px;
     color: var(--gray);
   }
-
   .skills-groups { display: flex; flex-direction: column; gap: 16px; }
   .skills-group .label {
     display: block;
@@ -191,7 +183,6 @@
     border-radius: 999px;
     font-weight: 500;
   }
-
   .samples-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -209,7 +200,6 @@
   .sample-card:hover { border-color: var(--accent); transform: translateY(-2px); }
   .sample-card .name { font-weight: 700; font-size: 14.5px; }
   .sample-card .desc { font-size: 13px; color: var(--gray); margin-top: 3px; }
-
   .cta {
     text-align: center;
     background: var(--navy);
@@ -227,20 +217,17 @@
     border-radius: 10px;
     overflow: hidden;
   }
-
   footer {
     text-align: center;
     color: var(--gray);
     font-size: 13px;
     margin-top: 44px;
   }
-
   @media (max-width: 560px) {
     header.hero { flex-direction: column; text-align: center; }
     .contact { justify-content: center; }
     .stats { grid-template-columns: repeat(2, 1fr); }
   }
-
   @media print {
     .cta { display: none; }
     .stats { grid-template-columns: repeat(4, 1fr); }
@@ -249,10 +236,9 @@
 </head>
 <body>
 <div class="wrap">
-
   <header class="hero">
     <div class="photo-frame">
-      <img src="julia-photo.jpg" alt="Julia Poremba"
+      <img src="Profile_photo.PNG" alt="Julia Poremba"
            onerror="this.style.display='none'; document.getElementById('photo-fallback').style.display='flex';">
       <div class="photo-fallback" id="photo-fallback">JP</div>
     </div>
@@ -267,14 +253,12 @@
       </div>
     </div>
   </header>
-
   <div class="stats">
     <div class="stat"><span class="num">1</span><span class="label">National Research Grant</span></div>
     <div class="stat"><span class="num">4</span><span class="label">Solo Conference Presentations</span></div>
     <div class="stat"><span class="num">1</span><span class="label">Published Research Project</span></div>
     <div class="stat"><span class="num">2</span><span class="label">Languages, Bilingual Thematic Coding</span></div>
   </div>
-
   <section>
     <h2>Summary</h2>
     <p class="summary">
@@ -286,7 +270,6 @@
       beyond typical research training. Seeking a research or research-adjacent internship for a late August 2026 start.
     </p>
   </section>
-
   <section>
     <h2>Education</h2>
     <div class="entry">
@@ -302,10 +285,8 @@
       <div class="entry-sub">Foothill College</div>
     </div>
   </section>
-
   <section>
     <h2>Research Experience</h2>
-
     <div class="entry">
       <div class="entry-title"><span>Graduate Treatise: Trust in Consumer-AI Interactions</span><span>2026</span></div>
       <div class="entry-sub">University of Southern California</div>
@@ -314,7 +295,6 @@
         <li>Primary outcome measure is consumer purchasing behavior.</li>
       </ul>
     </div>
-
     <div class="entry">
       <div class="entry-title"><span>Psi Chi Mamie Phipps Clark Diversity Research Grant</span><span>2024&ndash;present</span></div>
       <div class="entry-sub">Nationally competitive award, awarded after two rounds of review</div>
@@ -329,7 +309,6 @@
         <cite>&mdash; USC faculty, privately, after her first semester</cite>
       </blockquote>
     </div>
-
     <div class="entry">
       <div class="entry-title"><span>Comparative Platform Research: YouTube Shorts, TikTok &amp; Reels</span><span>2026</span></div>
       <div class="entry-sub">USC UX Research coursework</div>
@@ -338,7 +317,6 @@
         <li>Preceded by a task-based usability study of YouTube Shorts (moderator guide, presentation, and video deliverables).</li>
       </ul>
     </div>
-
     <div class="entry">
       <div class="entry-title"><span>Machine Learning &amp; Human-Machine Interaction</span><span>SCU</span></div>
       <div class="entry-sub">Cognitive Neuroscience, taught by a Stanford research scientist</div>
@@ -347,7 +325,6 @@
         <li>Covered artificial neural networks and core ML architecture; perfect grade received in all coursework, ongoing faculty recommendations since.</li>
       </ul>
     </div>
-
     <div class="entry">
       <div class="entry-title"><span>AI Use in the Workplace: Qualitative Study</span><span>2026</span></div>
       <div class="entry-sub">USC coursework</div>
@@ -356,7 +333,6 @@
       </ul>
     </div>
   </section>
-
   <section>
     <h2>Work Experience</h2>
     <div class="entry">
@@ -381,7 +357,6 @@
       </ul>
     </div>
   </section>
-
   <section>
     <h2>Leadership &amp; Awards</h2>
     <div class="entry">
@@ -392,7 +367,6 @@
       </ul>
     </div>
   </section>
-
   <section>
     <h2>Selected Work Samples</h2>
     <div class="samples-grid">
@@ -400,13 +374,12 @@
         <div class="name">JetBlue / SAF Infographic</div>
         <div class="desc">Live-presented data storytelling case, perfect grade</div>
       </a>
-      <a class="sample-card" href="SPOTIFY MARKETING PLAN.pdf" target="_blank" rel="noopener">
+      <a class="sample-card" href="SPOTIFY_MARKETING_PLAN.pdf" target="_blank" rel="noopener">
         <div class="name">Spotify Marketing Plan</div>
         <div class="desc">Original segmentation &amp; gap analysis, self-directed</div>
       </a>
     </div>
   </section>
-
   <section>
     <h2>Skills</h2>
     <div class="skills-groups">
@@ -446,11 +419,9 @@
       </div>
     </div>
   </section>
-
   <section class="cta">
     <h2>Let's Talk</h2>
-    <p>Open to research and research-adjacent internships starting late August 2026. Grab time directly below.</p>
-
+    <p>Open to research and research-adjacent internships starting August 31st 2026. Grab time directly below.</p>
     <!-- CALENDLY EMBED -->
     <div id="calendly-embed">
       <!-- Calendly inline widget begin -->
@@ -459,11 +430,9 @@
       <!-- Calendly inline widget end -->
     </div>
   </section>
-
   <footer>
     Last updated July 2026
   </footer>
-
 </div>
 </body>
 </html>
