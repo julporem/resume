@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Julia Poremba | Research</title>
 <meta name="description" content="Julia Kioko Poremba, mixed-methods researcher. How people decide to trust technology, and what breaks that trust.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='15'%20fill='%23a8461f'/%3E%3Cpath%20d='M18%2012h28a9%209%200%200%201%209%209v17a9%209%200%200%201-9%209H33L21%2057V47h-3a9%209%200%200%201-9-9V21a9%209%200%200%201%209-9z'%20fill='%23f6f3ed'/%3E%3Ccircle%20cx='21'%20cy='37'%20r='4'%20fill='%23a8461f'/%3E%3Ccircle%20cx='32'%20cy='30'%20r='4'%20fill='%23a8461f'/%3E%3Ccircle%20cx='43'%20cy='23'%20r='4'%20fill='%23a8461f'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#f6f3ed">
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -144,36 +147,141 @@
     nav, .contact .btns { display: none; }
     .case, .card, .mini { break-inside: avoid; }
   }
+
+  /* ===== Design layer (v3): motion, cursor, icon. Copy and colors unchanged. ===== */
+  :root { --ease: cubic-bezier(.2,.7,.2,1); }
+  body { transition: background .3s, color .3s; }
+  section { scroll-margin-top: 64px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  /* Reading progress */
+  .progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent);
+    transform: scaleX(0); transform-origin: 0 50%; z-index: 120; pointer-events: none; }
+
+  /* Sticky nav with logo and scrollspy */
+  nav { position: sticky; top: 0; z-index: 90; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--paper) 84%, transparent); }
+  nav .mark { display: inline-flex; align-items: center; gap: 10px; }
+  nav .logo { flex: 0 0 auto; transition: transform .35s var(--ease); }
+  nav .mark:hover .logo { transform: rotate(-8deg) scale(1.08); }
+  nav .logo circle { transform-box: fill-box; transform-origin: center; }
+  nav .mark:hover .logo circle { animation: bob .7s var(--ease) both; }
+  nav .mark:hover .logo .d2 { animation-delay: .08s; }
+  nav .mark:hover .logo .d3 { animation-delay: .16s; }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 40% { transform: translateY(-4px); } }
+  nav .links { align-items: center; }
+  nav .links a { position: relative; transition: color .2s; }
+  nav .links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+  nav .links a.active { color: var(--ink); }
+  nav .links a.active::after { transform: scaleX(1); }
+  .theme { border: 0; background: var(--chip); color: var(--ink); width: 32px; height: 32px; border-radius: 50%;
+    display: inline-grid; place-items: center; cursor: pointer; transition: background .2s, transform .35s var(--ease); }
+  .theme:hover { background: var(--accent-soft); color: var(--accent); transform: rotate(180deg); }
+
+  /* Hero load sequence (the one orchestrated entrance) */
+  .js [data-hero] { opacity: 0; }
+  .js.ready [data-hero] { opacity: 1; animation: rise .8s var(--ease) var(--d, 0s) backwards; }
+  .js.ready [data-hero="pop"] { animation-name: pop; animation-duration: 1s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+  @keyframes pop { from { opacity: 0; transform: scale(.88) rotate(-4deg); } }
+  .hero h1 em { background: linear-gradient(var(--accent), var(--accent)) 0 94% / 0% 2px no-repeat; }
+  .js.ready .hero h1 em { animation: draw .9s var(--ease) .95s forwards; }
+  @keyframes draw { to { background-size: 100% 2px; } }
+  .portrait { transition: transform .4s var(--ease), border-color .3s; box-shadow: 0 0 0 6px var(--paper), 0 0 0 7px var(--line); }
+  .portrait:hover { transform: scale(1.04) rotate(-2deg); box-shadow: 0 0 0 6px var(--paper), 0 0 0 7px var(--accent); }
+  .portrait img { transition: transform .6s var(--ease); }
+  .portrait:hover img { transform: scale(1.06); }
+
+  /* The signature moment: the laddering example climbs one rung at a time */
+  .js .ladder li { opacity: 0; }
+  .js .ladder.in li { opacity: 1; animation: rung .55s var(--ease) backwards; }
+  .js .ladder.in li:nth-child(1) { animation-delay: .25s; }
+  .js .ladder.in li:nth-child(2) { animation-delay: .85s; }
+  .js .ladder.in li:nth-child(3) { animation-delay: 1.45s; }
+  .js .ladder.in li:nth-child(4) { animation-delay: 2.05s; }
+  @keyframes rung { from { opacity: 0; transform: translateX(-10px); } }
+
+  /* Live status pulse */
+  .status::before { animation: pulse 2.2s ease-out infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 var(--accent-soft); } 70% { box-shadow: 0 0 0 9px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+
+  /* Cards answer the cursor with a soft spotlight */
+  .card, .case, .mini { position: relative; isolation: isolate; transition: border-color .25s, transform .25s var(--ease), box-shadow .25s; }
+  .card::before, .case::before, .mini::before { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1;
+    pointer-events: none; opacity: 0; transition: opacity .3s;
+    background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), var(--accent-soft), transparent 65%); }
+  .card:hover::before, .case:hover::before, .mini:hover::before { opacity: 1; }
+  .card:hover, .case:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  .mini:hover { box-shadow: 0 14px 30px -20px rgba(22,24,29,.45); }
+  .mini .go { transition: transform .25s var(--ease); display: inline-block; }
+  .mini:hover .go { transform: translateX(4px); }
+  .doc::after { display: inline-block; transition: transform .25s var(--ease); }
+  .doc:hover::after { transform: translate(2px,-2px); }
+  .sowhat { transition: border-color .3s, padding-left .3s var(--ease); }
+  .case:hover .sowhat { padding-left: 24px; }
+  .btn { transition: background .15s, color .15s, border-color .15s, transform .2s var(--ease); }
+  .chip { transition: background .2s, color .2s; }
+  .chip:hover { background: var(--accent-soft); color: var(--accent); }
+
+  /* Cursor ring: fine pointers only, native cursor stays */
+  .cursor { position: fixed; left: 0; top: 0; width: 0; height: 0; pointer-events: none; z-index: 200; opacity: 0; transition: opacity .25s; }
+  .cursor.on { opacity: 1; }
+  .cursor::before { content: ""; position: absolute; left: -16px; top: -16px; width: 32px; height: 32px; border-radius: 50%;
+    border: 1.5px solid var(--accent); transition: transform .3s var(--ease), background .25s, border-color .25s; }
+  .cursor.hot::before { transform: scale(1.7); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+  .cursor.label::before { transform: scale(1.8); background: color-mix(in srgb, var(--accent) 92%, transparent); }
+  .cursor.down::before { transform: scale(.75); }
+  .cursor span { position: absolute; left: 0; top: 0; transform: translate(-50%,-50%); font: 600 12px/1 Inter, sans-serif;
+    letter-spacing: .3px; color: var(--paper); opacity: 0; transition: opacity .2s; white-space: nowrap; }
+  .cursor.label span { opacity: 1; }
+
+  nav .mark span { white-space: nowrap; }
+  @media (max-width: 760px) {
+    nav .logo { width: 24px; height: 24px; }
+    nav .mark { gap: 8px; font-size: 14px; }
+    nav .links { gap: 10px; font-size: 13.5px; }
+  }
+  @media (max-width: 400px) { nav .mark span { font-size: 13px; } nav .links { gap: 8px; font-size: 13px; } nav .logo { width: 22px; height: 22px; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .js [data-hero], .js .ladder li { opacity: 1 !important; }
+    .hero h1 em { background-size: 100% 2px !important; }
+  }
+  @media print { .progress, .cursor, nav .theme { display: none !important; } .js [data-hero], .js .ladder li { opacity: 1 !important; } }
 </style>
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <div class="wrap">
 
   <nav>
-    <a class="mark" href="#">Julia Kioko Poremba</a>
+    <a class="mark" href="#"><svg class="logo" viewBox="0 0 64 64" width="26" height="26" aria-hidden="true"><rect width="64" height="64" rx="15" fill="var(--accent)"/><path d="M18 12h28a9 9 0 0 1 9 9v17a9 9 0 0 1-9 9H33L21 57V47h-3a9 9 0 0 1-9-9V21a9 9 0 0 1 9-9z" fill="var(--paper)"/><circle class="d1" cx="21" cy="37" r="4" fill="var(--accent)"/><circle class="d2" cx="32" cy="30" r="4" fill="var(--accent)"/><circle class="d3" cx="43" cy="23" r="4" fill="var(--accent)"/></svg><span>Julia Kioko Poremba</span></a>
     <div class="links">
       <a href="#now">Now</a>
       <a href="#work">Work</a>
       <a class="hide-sm" href="#foundations">Background</a>
       <a href="Julia_Poremba_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <button class="theme" type="button" aria-label="Switch light and dark mode"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></svg></button>
     </div>
   </nav>
 
   <header class="hero">
     <div>
-      <p class="eyebrow">Mixed-methods researcher &middot; M.S. Applied Psychology, USC</p>
-      <h1>I study how people decide to <em>trust</em> technology, and what breaks that trust.</h1>
-      <p class="lede">
+      <p class="eyebrow" data-hero style="--d:.05s">Mixed-methods researcher &middot; M.S. Applied Psychology, USC</p>
+      <h1 data-hero style="--d:.15s">I study how people decide to <em>trust</em> technology, and what breaks that trust.</h1>
+      <p class="lede" data-hero style="--d:.3s">
         Interviews to find out why. Experiments to prove it. <strong>A recommendation at the end of every study</strong>,
         because a finding nobody acts on is just trivia.
       </p>
-      <div class="btns">
+      <div class="btns" data-hero style="--d:.42s">
         <a class="btn solid" href="#work">See the work</a>
         <a class="btn" href="Julia_Poremba_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
         <a class="btn" href="mailto:juliakporemba@gmail.com">Email me</a>
       </div>
     </div>
-    <div class="portrait"><img src="julia-photo.jpg" alt="Julia Poremba"></div>
+    <div class="portrait" data-hero="pop" data-cursor="hey" style="--d:.2s"><img src="julia-photo.jpg" alt="Julia Poremba"></div>
   </header>
 
   <!-- NOW -->
@@ -189,7 +297,7 @@
         <div class="where">Research Consultant &middot; Elite Luxury Homes &amp; Eve &amp; Roque &middot; Fall 2026</div>
         <p>Leadership wants to build a curated marketplace for extraordinary properties, possibly with AI search. My job is to find out whether the need is real, and in which market. I pitched the study design and I run it.</p>
         <p>12 to 16 laddering interviews with planners, producers, and location scouts, plus competitor teardowns and an audit of what AI tools recommend when someone asks for a venue.</p>
-        <div class="ladder">
+        <div class="ladder" data-ladder>
           <span class="lbl">How laddering works</span>
           <ol><li>Private gated entry</li><li><span>No paparazzi</span></li><li><span>Client feels safe</span></li><li><span>Planner looks competent</span></li></ol>
         </div>
@@ -201,8 +309,8 @@
         <h3>Can I Help You? Emotion, AI, and trust</h3>
         <div class="where">Graduate Treatise &middot; USC &middot; 2026</div>
         <p>When an AI chatbot gets something wrong, does the way it responds emotionally decide whether you keep trusting it, and the brand behind it?</p>
-        <p>A three-condition experiment: emotionally aligned, misaligned, and purely informational responses after a built-in error. I designed the study, then coded the chatbot web app myself, hosted it on Cloudflare, and wired it into Qualtrics. Recruiting through Prolific now.</p>
-        <div class="meta"><span class="chip">Experimental design</span><span class="chip">Web app build</span><span class="chip">Qualtrics</span><span class="chip">Prolific</span></div>
+        <p>A three-condition experiment: emotionally aligned, misaligned, and purely informational responses after a built-in error. I designed the study, then coded the chatbot web app myself, hosted it on Cloudflare, and wired it into Qualtrics. Recruiting through my own networks now.</p>
+        <div class="meta"><span class="chip">Experimental design</span><span class="chip">Web app build</span><span class="chip">Qualtrics</span><span class="chip">Snowball sampling</span></div>
         <div class="foot"><a href="work/Poremba_Treatise-Proposal.pdf" target="_blank" rel="noopener">Read the proposal &#8599;</a> &nbsp;&middot;&nbsp; Live demo on request</div>
       </div>
     </div>
@@ -293,19 +401,19 @@
       <p>Strategy, organizational research, and data storytelling.</p>
     </div>
     <div class="more">
-      <a class="mini" href="work/Poremba_Spotify-Marketing-Plan.pdf" target="_blank" rel="noopener">
+      <a class="mini" data-cursor="open" href="work/Poremba_Spotify-Marketing-Plan.pdf" target="_blank" rel="noopener">
         <span class="kicker">Marketing strategy</span>
         <h3>Spotify marketing plan</h3>
         <p>I pitched the project and wrote the full plan. The core finding: premium sells when it feels like protection for your listening routine, not a feature upgrade.</p>
         <span class="go">Read the plan &#8599;</span>
       </a>
-      <a class="mini" href="work/Poremba_DEI-Training-White-Paper.pdf" target="_blank" rel="noopener">
+      <a class="mini" data-cursor="open" href="work/Poremba_DEI-Training-White-Paper.pdf" target="_blank" rel="noopener">
         <span class="kicker">Organizational research</span>
         <h3>Why diversity training stalls</h3>
         <p>I led the research and designed the paper. Training fails when it ignores how employees actually experience it, so the fix is a systems-level approach.</p>
         <span class="go">Read the white paper &#8599;</span>
       </a>
-      <a class="mini" href="work/Poremba_JetBlue-Infographic.png" target="_blank" rel="noopener">
+      <a class="mini" data-cursor="open" href="work/Poremba_JetBlue-Infographic.png" target="_blank" rel="noopener">
         <span class="kicker">Data storytelling &middot; Solo</span>
         <h3>JetBlue and the fuel crisis</h3>
         <p>Industry data turned into one recommendation: pair fuel hedging with sustainable aviation fuel. Lock in the price, then clean up the supply.</p>
@@ -353,5 +461,107 @@
 
   <footer>Julia Kioko Poremba &middot; Updated November 2026</footer>
 </div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = matchMedia('(pointer: fine)').matches;
+
+  // Hero sequence starts once fonts are in, so nothing jumps
+  function go() { root.classList.add('ready'); }
+  if (document.fonts && document.fonts.ready) { Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 900); })]).then(go); } else { go(); }
+
+  // Ladder climbs when it scrolls into view
+  var ladders = document.querySelectorAll('[data-ladder]');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: .6 });
+    ladders.forEach(function (l) { io.observe(l); });
+  } else { ladders.forEach(function (l) { l.classList.add('in'); }); }
+
+  // Progress bar
+  var bar = document.querySelector('.progress');
+  function prog() {
+    var h = root.scrollHeight - root.clientHeight;
+    bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, root.scrollTop / h) : 0) + ')';
+  }
+  addEventListener('scroll', prog, { passive: true }); prog();
+
+  // Scrollspy
+  var links = {};
+  document.querySelectorAll('nav .links a[href^="#"]').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting && links[e.target.id]) {
+          Object.keys(links).forEach(function (k) { links[k].classList.remove('active'); });
+          links[e.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    Object.keys(links).forEach(function (id) { var s = document.getElementById(id); if (s) spy.observe(s); });
+  }
+
+  // Theme toggle
+  var tb = document.querySelector('.theme');
+  function cur() { return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+  function meta() { var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = cur() === 'dark' ? '#131417' : '#f6f3ed'; }
+  tb.addEventListener('click', function () {
+    var n = cur() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', n);
+    try { localStorage.setItem('theme', n); } catch (e) {}
+    meta();
+  });
+  meta();
+
+  if (!fine || reduce) return;
+
+  // Spotlight on cards
+  document.addEventListener('pointermove', function (e) {
+    var c = e.target.closest && e.target.closest('.card,.case,.mini');
+    if (!c) return;
+    var r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }, { passive: true });
+
+  // Magnetic buttons
+  document.querySelectorAll('.btn').forEach(function (b) {
+    b.addEventListener('pointermove', function (e) {
+      var r = b.getBoundingClientRect();
+      var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+      var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+      b.style.transform = 'translate(' + (dx * 8).toFixed(1) + 'px,' + (dy * 6).toFixed(1) + 'px)';
+    });
+    b.addEventListener('pointerleave', function () { b.style.transform = ''; });
+  });
+
+  // Cursor ring that trails the native cursor
+  var ring = document.createElement('div');
+  ring.className = 'cursor'; ring.setAttribute('aria-hidden', 'true'); ring.innerHTML = '<span></span>';
+  document.body.appendChild(ring);
+  var lab = ring.firstChild, x = 0, y = 0, rx = 0, ry = 0, seen = false;
+  addEventListener('pointermove', function (e) {
+    if (e.pointerType === 'touch') return;
+    x = e.clientX; y = e.clientY;
+    if (!seen) { seen = true; rx = x; ry = y; }
+    ring.classList.add('on');
+    var t = e.target, tag = t.closest && t.closest('[data-cursor]');
+    ring.classList.toggle('label', !!tag);
+    if (tag) lab.textContent = tag.getAttribute('data-cursor');
+    ring.classList.toggle('hot', !tag && !!(t.closest && t.closest('a,button')));
+  }, { passive: true });
+  root.addEventListener('mouseleave', function () { ring.classList.remove('on'); });
+  addEventListener('mousedown', function () { ring.classList.add('down'); });
+  addEventListener('mouseup', function () { ring.classList.remove('down'); });
+  (function loop() {
+    rx += (x - rx) * .2; ry += (y - ry) * .2;
+    ring.style.transform = 'translate3d(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px,0)';
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
 </body>
 </html>
