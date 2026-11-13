@@ -3,436 +3,355 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Julia Poremba — Consumer Insights &amp; Research</title>
+<title>Julia Poremba | Research</title>
+<meta name="description" content="Julia Kioko Poremba, mixed-methods researcher. How people decide to trust technology, and what breaks that trust.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #1f2937;
-    --gray: #5b6472;
-    --line: #e2e5ea;
-    --bg: #ffffff;
-    --panel: #f8f7f5;
-    --accent: #b45309;
-    --accent-tint: #fdf1e6;
+    --paper: #f6f3ed;
+    --card: #fffdf9;
+    --ink: #16181d;
+    --mute: #5c616b;
+    --line: #e2ddd2;
+    --accent: #a8461f;
+    --accent-soft: #f3e4da;
+    --chip: #ece7dd;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #131417; --card: #1b1d21; --ink: #ece9e3; --mute: #a3a7ae;
+      --line: #2c2f35; --accent: #e08a5f; --accent-soft: #2e221c; --chip: #25282d;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #131417; --card: #1b1d21; --ink: #ece9e3; --mute: #a3a7ae;
+    --line: #2c2f35; --accent: #e08a5f; --accent-soft: #2e221c; --chip: #25282d;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Calibri, Arial, sans-serif;
-    color: var(--navy);
-    background: var(--bg);
-    line-height: 1.6;
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: Inter, -apple-system, "Segoe UI", Arial, sans-serif;
+    font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
   }
-  .wrap {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 48px 24px 80px;
-  }
-  header.hero {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    padding-bottom: 28px;
-    border-bottom: 3px solid var(--navy);
-    margin-bottom: 30px;
-  }
-  .photo-frame {
-    position: relative;
-    width: 128px;
-    height: 128px;
-    flex: 0 0 auto;
-    border-radius: 50%;
-    padding: 4px;
-    background: linear-gradient(135deg, var(--accent), var(--navy));
-  }
-  .photo-frame img, .photo-fallback {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    border: 3px solid #fff;
-  }
-  .photo-fallback {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: var(--navy);
-    color: #fff;
-    font-size: 40px;
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
-  .hero-text h1 {
-    margin: 0 0 4px;
-    font-size: 32px;
-    letter-spacing: 0.3px;
-  }
-  .tagline {
-    color: var(--accent);
-    font-weight: 600;
-    font-size: 15px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .contact {
-    color: var(--gray);
-    font-size: 14.5px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 14px;
-  }
-  .contact a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
-  .contact a:hover { border-bottom-color: var(--accent); color: var(--accent); }
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 36px;
-  }
-  .stat {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 14px 10px;
-    text-align: center;
-  }
-  .stat .num {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--accent);
-    display: block;
-    line-height: 1.1;
-  }
-  .stat .label {
-    font-size: 11.5px;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 4px;
-    display: block;
-  }
-  section { margin-bottom: 36px; }
-  h2 {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 1.8px;
-    color: var(--navy);
-    margin: 0 0 16px;
-    padding-left: 12px;
-    border-left: 4px solid var(--accent);
-  }
-  .summary { font-size: 16px; }
-  .entry { margin-bottom: 20px; position: relative; padding-left: 0; }
-  .entry:last-child { margin-bottom: 0; }
-  .entry-title {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 4px 12px;
-    font-weight: 700;
-    font-size: 15.5px;
-  }
-  .entry-title span:last-child {
-    color: var(--gray);
-    font-weight: 500;
-    font-size: 13.5px;
-    white-space: nowrap;
-  }
-  .entry-sub {
-    color: var(--accent);
-    font-size: 13.5px;
-    font-weight: 600;
-    margin-top: 2px;
-  }
-  ul.bullets { margin: 8px 0 0; padding-left: 20px; }
-  ul.bullets li { margin-bottom: 5px; font-size: 15px; }
-  blockquote {
-    margin: 14px 0 0;
-    padding: 12px 18px;
-    background: var(--accent-tint);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    font-size: 14.5px;
-    font-style: italic;
-    color: #4a3a2c;
-  }
-  blockquote cite {
-    display: block;
-    margin-top: 6px;
-    font-style: normal;
-    font-size: 12.5px;
-    color: var(--gray);
-  }
-  .skills-groups { display: flex; flex-direction: column; gap: 16px; }
-  .skills-group .label {
-    display: block;
-    font-size: 11.5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--gray);
-    margin-bottom: 8px;
-  }
-  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
-  .pill {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    color: var(--navy);
-    font-size: 13.5px;
-    padding: 6px 13px;
-    border-radius: 999px;
-    font-weight: 500;
-  }
-  .samples-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 12px;
-  }
-  .sample-card {
-    display: block;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 14px 16px;
-    text-decoration: none;
-    color: var(--navy);
-    transition: border-color .15s, transform .15s;
-  }
-  .sample-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .sample-card .name { font-weight: 700; font-size: 14.5px; }
-  .sample-card .desc { font-size: 13px; color: var(--gray); margin-top: 3px; }
-  .cta {
-    text-align: center;
-    background: var(--navy);
-    color: #fff;
-    border-radius: 14px;
-    padding: 34px 20px;
-  }
-  .cta h2 { border: none; color: #fff; padding-left: 0; }
-  .cta h2::before { content: none; }
-  .cta p { color: #d8dce3; margin: 0 0 18px; font-size: 15px; }
-  #calendly-embed {
-    min-width: 280px;
-    height: 650px;
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  footer {
-    text-align: center;
-    color: var(--gray);
-    font-size: 13px;
-    margin-top: 44px;
-  }
-  @media (max-width: 560px) {
-    header.hero { flex-direction: column; text-align: center; }
-    .contact { justify-content: center; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
+  a { color: inherit; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .serif { font-family: Lora, Georgia, serif; }
+
+  /* Nav */
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; font-size: 14px; }
+  nav .mark { font-weight: 600; letter-spacing: .2px; text-decoration: none; }
+  nav .links { display: flex; gap: 22px; }
+  nav .links a { text-decoration: none; color: var(--mute); }
+  nav .links a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1fr 220px; gap: 48px; align-items: center; padding: 48px 0 56px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-size: 12.5px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
+  .hero h1 { font-family: Lora, Georgia, serif; font-weight: 500; font-size: clamp(32px, 5vw, 50px); line-height: 1.12; letter-spacing: -.5px; margin: 0 0 22px; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero p.lede { font-size: 17.5px; color: var(--mute); max-width: 560px; margin: 0 0 28px; }
+  .hero p.lede strong { color: var(--ink); font-weight: 600; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { display: inline-block; padding: 11px 20px; border-radius: 999px; font-size: 14.5px; font-weight: 600; text-decoration: none; border: 1.5px solid var(--ink); transition: background .15s, color .15s; }
+  .btn.solid { background: var(--ink); color: var(--paper); }
+  .btn.solid:hover { background: var(--accent); border-color: var(--accent); }
+  .btn:not(.solid):hover { border-color: var(--accent); color: var(--accent); }
+  .portrait { width: 220px; height: 220px; border-radius: 50%; overflow: hidden; background: #fff; border: 1px solid var(--line); }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; filter: grayscale(1); }
+
+  /* Sections */
+  section { padding: 64px 0 8px; }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 26px; }
+  .sec-head h2 { font-family: Lora, Georgia, serif; font-weight: 500; font-size: 30px; margin: 0; letter-spacing: -.3px; }
+  .sec-head p { margin: 0; color: var(--mute); font-size: 14.5px; max-width: 380px; text-align: right; }
+
+  /* Now cards */
+  .now { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px 26px 24px; }
+  .status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--accent); }
+  .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .card h3 { font-family: Lora, Georgia, serif; font-weight: 600; font-size: 21px; line-height: 1.3; margin: 12px 0 4px; }
+  .card .where { font-size: 14px; color: var(--mute); margin-bottom: 14px; }
+  .card p { margin: 0 0 12px; font-size: 15.5px; }
+  .ladder { margin: 16px 0 14px; padding: 14px 16px; background: var(--accent-soft); border-radius: 10px; font-size: 14px; }
+  .ladder .lbl { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .ladder ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 4px; align-items: center; }
+  .ladder li { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; }
+  .ladder li + li::before { content: "\2192"; margin: 0 8px 0 -2px; color: var(--accent); }
+  .ladder li + li { border: none; background: none; padding: 0; }
+  .ladder li + li span { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; display: inline-block; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .chip { font-size: 12.5px; background: var(--chip); border-radius: 999px; padding: 3px 10px; color: var(--ink); }
+  .card .foot { margin-top: 14px; font-size: 14px; color: var(--mute); }
+  .card .foot a { color: var(--accent); font-weight: 600; text-decoration: none; }
+
+  /* Case studies */
+  .case { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 30px; margin-bottom: 18px; }
+  .case-top { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+  .case h3 { font-family: Lora, Georgia, serif; font-weight: 600; font-size: 23px; line-height: 1.25; margin: 6px 0 4px; }
+  .case .role { font-size: 14px; color: var(--mute); }
+  .case .role b { color: var(--ink); font-weight: 600; }
+  .kicker { font-size: 12px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .grid3 h4 { margin: 0 0 6px; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--mute); font-weight: 600; }
+  .grid3 p { margin: 0; font-size: 15px; }
+  .sowhat { margin-top: 20px; padding: 14px 18px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 10px 10px 0; font-size: 15.5px; }
+  .sowhat b { font-weight: 600; }
+  .links-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .doc { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; text-decoration: none; border: 1.5px solid var(--line); border-radius: 999px; padding: 7px 14px; white-space: nowrap; transition: border-color .15s, color .15s; }
+  .doc:hover { border-color: var(--accent); color: var(--accent); }
+  .doc::after { content: "\2197"; font-weight: 500; }
+
+  /* More work */
+  .more { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .mini { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; text-decoration: none; transition: border-color .15s, transform .15s; }
+  .mini:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .mini h3 { font-family: Lora, Georgia, serif; font-weight: 600; font-size: 18.5px; margin: 6px 0 8px; line-height: 1.3; }
+  .mini p { margin: 0 0 14px; font-size: 14.5px; color: var(--mute); flex: 1; }
+  .mini .go { font-size: 13.5px; font-weight: 600; color: var(--accent); }
+
+  /* Foundations */
+  .found { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; }
+  .found .card ul { margin: 0; padding-left: 18px; font-size: 15px; }
+  .found .card li { margin-bottom: 6px; }
+  .tools { display: flex; flex-direction: column; gap: 14px; }
+  .tools .lbl { display: block; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--mute); font-weight: 600; margin-bottom: 7px; }
+  .tools .meta { margin: 0; }
+
+  /* Contact */
+  .contact { margin: 72px 0 0; padding: 56px 0 64px; border-top: 1px solid var(--line); text-align: center; }
+  .contact h2 { font-family: Lora, Georgia, serif; font-weight: 500; font-size: clamp(28px, 4vw, 38px); margin: 0 0 12px; letter-spacing: -.3px; }
+  .contact p { color: var(--mute); margin: 0 auto 26px; max-width: 520px; }
+  .contact .btns { justify-content: center; }
+  footer { text-align: center; font-size: 13px; color: var(--mute); padding-bottom: 40px; }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; gap: 28px; padding: 24px 0 44px; }
+    .portrait { width: 132px; height: 132px; order: -1; }
+    .now, .found, .more { grid-template-columns: 1fr; }
+    .grid3 { grid-template-columns: 1fr; gap: 16px; }
+    .case { padding: 22px; }
+    .sec-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .sec-head p { text-align: left; }
+    nav .links { gap: 14px; }
+    nav .links a.hide-sm { display: none; }
+    .wrap { padding: 0 16px; }
   }
   @media print {
-    .cta { display: none; }
-    .stats { grid-template-columns: repeat(4, 1fr); }
+    nav, .contact .btns { display: none; }
+    .case, .card, .mini { break-inside: avoid; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
+
+  <nav>
+    <a class="mark" href="#">Julia Kioko Poremba</a>
+    <div class="links">
+      <a href="#now">Now</a>
+      <a href="#work">Work</a>
+      <a class="hide-sm" href="#foundations">Background</a>
+      <a href="Julia_Poremba_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </nav>
+
   <header class="hero">
-    <div class="photo-frame">
-      <img src="Profile_photo.PNG" alt="Julia Poremba"
-           onerror="this.style.display='none'; document.getElementById('photo-fallback').style.display='flex';">
-      <div class="photo-fallback" id="photo-fallback">JP</div>
-    </div>
-    <div class="hero-text">
-      <h1>Julia Kioko Poremba</h1>
-      <div class="tagline">Consumer &amp; Market Research &middot; UX &amp; Behavioral Insights</div>
-      <div class="contact">
-        <a href="mailto:juliakporemba@gmail.com">juliakporemba@gmail.com</a>
-        <span>(916) 221-8250</span>
-        <a href="https://linkedin.com/in/juliaporemba" target="_blank" rel="noopener">linkedin.com/in/juliaporemba</a>
-        <span>San Jose / Bay Area, CA &amp; Remote</span>
+    <div>
+      <p class="eyebrow">Mixed-methods researcher &middot; M.S. Applied Psychology, USC</p>
+      <h1>I study how people decide to <em>trust</em> technology, and what breaks that trust.</h1>
+      <p class="lede">
+        Interviews to find out why. Experiments to prove it. <strong>A recommendation at the end of every study</strong>,
+        because a finding nobody acts on is just trivia.
+      </p>
+      <div class="btns">
+        <a class="btn solid" href="#work">See the work</a>
+        <a class="btn" href="Julia_Poremba_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+        <a class="btn" href="mailto:juliakporemba@gmail.com">Email me</a>
       </div>
     </div>
+    <div class="portrait"><img src="julia-photo.jpg" alt="Julia Poremba"></div>
   </header>
-  <div class="stats">
-    <div class="stat"><span class="num">1</span><span class="label">National Research Grant</span></div>
-    <div class="stat"><span class="num">4</span><span class="label">Solo Conference Presentations</span></div>
-    <div class="stat"><span class="num">1</span><span class="label">Published Research Project</span></div>
-    <div class="stat"><span class="num">2</span><span class="label">Languages, Bilingual Thematic Coding</span></div>
-  </div>
-  <section>
-    <h2>Summary</h2>
-    <p class="summary">
-      Graduate researcher (M.S. Applied Psychology, Consumer &amp; Market Research, USC, expected Dec 2026)
-      applying experimental rigor to consumer and product questions. Nationally competitive grant recipient,
-      four-time conference presenter, published research contributor, and current author of an original treatise
-      building three AI chatbot variants to study trust in consumer-AI interactions. Trained in experimental design,
-      survey research, qualitative interviewing, and statistical analysis, with hands-on software skills that go
-      beyond typical research training. Seeking a research or research-adjacent internship for a late August 2026 start.
-    </p>
-  </section>
-  <section>
-    <h2>Education</h2>
-    <div class="entry">
-      <div class="entry-title"><span>M.S., Applied Psychology (Consumer &amp; Market Research)</span><span>Expected Dec 2026</span></div>
-      <div class="entry-sub">University of Southern California</div>
+
+  <!-- NOW -->
+  <section id="now">
+    <div class="sec-head">
+      <h2>Right now</h2>
+      <p>Two live studies. One qualitative, one experimental. Same question underneath.</p>
     </div>
-    <div class="entry">
-      <div class="entry-title"><span>B.S., Psychology, Magna Cum Laude</span><span>2022&ndash;2024</span></div>
-      <div class="entry-sub">Santa Clara University</div>
-    </div>
-    <div class="entry">
-      <div class="entry-title"><span>Five Associate Degrees, High Honors</span><span>2019&ndash;2021</span></div>
-      <div class="entry-sub">Foothill College</div>
-    </div>
-  </section>
-  <section>
-    <h2>Research Experience</h2>
-    <div class="entry">
-      <div class="entry-title"><span>Graduate Treatise: Trust in Consumer-AI Interactions</span><span>2026</span></div>
-      <div class="entry-sub">University of Southern California</div>
-      <ul class="bullets">
-        <li>Designed an original experimental intervention building three distinct AI chatbot variants to test their effect on consumer trust in the AI and the deploying brand.</li>
-        <li>Primary outcome measure is consumer purchasing behavior.</li>
-      </ul>
-    </div>
-    <div class="entry">
-      <div class="entry-title"><span>Psi Chi Mamie Phipps Clark Diversity Research Grant</span><span>2024&ndash;present</span></div>
-      <div class="entry-sub">Nationally competitive award, awarded after two rounds of review</div>
-      <ul class="bullets">
-        <li>Coded qualitative data, in English and Spanish, for a now-published paper on cross-cultural perceptions of empathy.</li>
-        <li>Awarded the nationally competitive Psi Chi Mamie Phipps Clark Research Grant: Designed and led an original study on avoided negative affect (ANA) and its effect on engagement with difficult social issues.</li>
-        <li>Personally presented at the Western Psychological Association (2024) and twice more at Santa Clara University (2024). Results were presented in France by my lab mentor.</li>
-        <li>Led two subsequent studies; results presented by my mentored students at WPA and an SCU symposium (2026).</li>
-      </ul>
-      <blockquote>
-        "Already knows more about research &amp; analysis than students graduating the program."
-        <cite>&mdash; USC faculty, privately, after her first semester</cite>
-      </blockquote>
-    </div>
-    <div class="entry">
-      <div class="entry-title"><span>Comparative Platform Research: YouTube Shorts, TikTok &amp; Reels</span><span>2026</span></div>
-      <div class="entry-sub">USC UX Research coursework</div>
-      <ul class="bullets">
-        <li>Leading in-depth interviews with short-form video users and non-users to identify what actually drives platform choice, including how that shifts in mobile-first growth markets.</li>
-        <li>Preceded by a task-based usability study of YouTube Shorts (moderator guide, presentation, and video deliverables).</li>
-      </ul>
-    </div>
-    <div class="entry">
-      <div class="entry-title"><span>Machine Learning &amp; Human-Machine Interaction</span><span>SCU</span></div>
-      <div class="entry-sub">Cognitive Neuroscience, taught by a Stanford research scientist</div>
-      <ul class="bullets">
-        <li>Partnered with the university's Human-Machine Interaction &amp; Innovation (HMI&sup2;) Lab on an assistive robot learning to parse unstructured spoken language.</li>
-        <li>Covered artificial neural networks and core ML architecture; perfect grade received in all coursework, ongoing faculty recommendations since.</li>
-      </ul>
-    </div>
-    <div class="entry">
-      <div class="entry-title"><span>AI Use in the Workplace: Qualitative Study</span><span>2026</span></div>
-      <div class="entry-sub">USC coursework</div>
-      <ul class="bullets">
-        <li>Conducted 9 in-depth interviews and 4 hours of observational research; delivered findings via slide deck.</li>
-      </ul>
+    <div class="now">
+      <div class="card">
+        <span class="status">In the field</span>
+        <h3>Who do people trust when the stakes are personal?</h3>
+        <div class="where">Research Consultant &middot; Elite Luxury Homes &amp; Eve &amp; Roque &middot; Fall 2026</div>
+        <p>Leadership wants to build a curated marketplace for extraordinary properties, possibly with AI search. My job is to find out whether the need is real, and in which market. I pitched the study design and I run it.</p>
+        <p>12 to 16 laddering interviews with planners, producers, and location scouts, plus competitor teardowns and an audit of what AI tools recommend when someone asks for a venue.</p>
+        <div class="ladder">
+          <span class="lbl">How laddering works</span>
+          <ol><li>Private gated entry</li><li><span>No paparazzi</span></li><li><span>Client feels safe</span></li><li><span>Planner looks competent</span></li></ol>
+        </div>
+        <div class="meta"><span class="chip">In-depth interviews</span><span class="chip">Laddering</span><span class="chip">Trust mapping</span><span class="chip">Competitor teardowns</span></div>
+      </div>
+
+      <div class="card">
+        <span class="status">Collecting data</span>
+        <h3>Can I Help You? Emotion, AI, and trust</h3>
+        <div class="where">Graduate Treatise &middot; USC &middot; 2026</div>
+        <p>When an AI chatbot gets something wrong, does the way it responds emotionally decide whether you keep trusting it, and the brand behind it?</p>
+        <p>A three-condition experiment: emotionally aligned, misaligned, and purely informational responses after a built-in error. I designed the study, then coded the chatbot web app myself, hosted it on Cloudflare, and wired it into Qualtrics. Recruiting through Prolific now.</p>
+        <div class="meta"><span class="chip">Experimental design</span><span class="chip">Web app build</span><span class="chip">Qualtrics</span><span class="chip">Prolific</span></div>
+        <div class="foot"><a href="work/Poremba_Treatise-Proposal.pdf" target="_blank" rel="noopener">Read the proposal &#8599;</a> &nbsp;&middot;&nbsp; Live demo on request</div>
+      </div>
     </div>
   </section>
-  <section>
-    <h2>Work Experience</h2>
-    <div class="entry">
-      <div class="entry-title"><span>Consumer Insights Intern</span><span>2025&ndash;2026</span></div>
-      <ul class="bullets">
-        <li>Oversaw consumer surveys from creation to presentation. Interpreted results. Produced marketing material.</li>
-      </ul>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="sec-head">
+      <h2>Selected work</h2>
+      <p>Each one asks a question, answers it, and ends with what to do next.</p>
     </div>
-    <div class="entry">
-      <div class="entry-title"><span>Applied Market Research: Spotify Marketing Plan</span><span>2025</span></div>
-      <div class="entry-sub">Self-directed original research, USC coursework</div>
-      <ul class="bullets">
-        <li>Built a hierarchical value map, gap analysis, and market segmentation strategy from original consumer interviews.</li>
-        <li>Authored the final report used to brief the project team; near-perfect grade on the write-up, perfect grade on the live presentation.</li>
-      </ul>
-    </div>
-    <div class="entry">
-      <div class="entry-title"><span>Independent Research: Multicultural Representation in Public History</span><span>2020&ndash;2021</span></div>
-      <div class="entry-sub">Foothill College, invited by faculty</div>
-      <ul class="bullets">
-        <li>Conducted original mixed-methods research combining IDIs with secondary data collection; presented findings at the 2021 Foothill College Research &amp; Service Leadership Symposium.</li>
-      </ul>
-    </div>
+
+    <article class="case">
+      <div class="case-top">
+        <div>
+          <span class="kicker">Research synthesis &middot; Solo</span>
+          <h3>The four ways AI loses consumer trust</h3>
+          <div class="role">USC &middot; PSYC 550A &middot; <b>Solo project</b></div>
+        </div>
+        <div class="links-row"><a class="doc" href="work/Poremba_AI-Trust-Review.pdf" target="_blank" rel="noopener">View presentation</a></div>
+      </div>
+      <div class="grid3">
+        <div><h4>The question</h4><p>What makes consumers trust AI in the marketplace, and where exactly does that trust fail?</p></div>
+        <div><h4>What I did</h4><p>Synthesized the consumer-AI research on anthropomorphism, affect, and trust into a working model of trust failure.</p></div>
+        <div><h4>What I found</h4><p>Four failure modes: feeling surveilled, being misclassified, fear of replacement, and emotionally tone-deaf responses. The last one does the most damage.</p></div>
+      </div>
+      <div class="sowhat"><b>So what:</b> warmth is AI's weakest dimension and its biggest driver of attachment. That gap became my treatise.</div>
+    </article>
+
+    <article class="case">
+      <div class="case-top">
+        <div>
+          <span class="kicker">Qualitative &middot; Solo</span>
+          <h3>AI at work: everyone uses it, nobody has rules for it</h3>
+          <div class="role">USC &middot; PSYC 509 &middot; <b>Solo project</b></div>
+        </div>
+        <div class="links-row"><a class="doc" href="work/Poremba_AI-at-Work.pdf" target="_blank" rel="noopener">View report</a></div>
+      </div>
+      <div class="grid3">
+        <div><h4>The question</h4><p>How are employees across industries actually using AI on the job?</p></div>
+        <div><h4>What I did</h4><p>4 in-depth interviews (60 to 90 minutes each) and 5 hours of ethnographic observation across 3 work settings, with a structured observation checklist.</p></div>
+        <div><h4>What I found</h4><p>AI is already built into daily routines. Concerns about privacy and accuracy sit right alongside daily use. Not one participant had a written AI policy at work.</p></div>
+      </div>
+      <div class="sowhat"><b>So what:</b> the barrier isn't the technology, it's the lack of shared norms. Four recommendations, starting with written AI policies by context.</div>
+    </article>
+
+    <article class="case">
+      <div class="case-top">
+        <div>
+          <span class="kicker">Quantitative &middot; Team of 2</span>
+          <h3>Ketel One is talking to the wrong drinker</h3>
+          <div class="role">USC &middot; Segmentation review &middot; <b>I led the project and designed the deck</b></div>
+        </div>
+        <div class="links-row"><a class="doc" href="work/Poremba_Vodka-Segmentation.pdf" target="_blank" rel="noopener">View deck</a></div>
+      </div>
+      <div class="grid3">
+        <div><h4>The question</h4><p>What actually drives vodka choice, and where should a heritage brand position itself?</p></div>
+        <div><h4>What I did</h4><p>Principal components analysis on 47 benefit statements (N=801) to find 8 choice factors, then cluster analysis to find 7 segments.</p></div>
+        <div><h4>What I found</h4><p>The heritage messaging misses what the best segment values: taste. Personal Taste Seekers order premium 84% of the time, and they already prefer Ketel One at more than double the market rate.</p></div>
+      </div>
+      <div class="sowhat"><b>So what:</b> reposition around private, personal taste. Creative direction: <em>"Good taste doesn't need an audience."</em></div>
+    </article>
+
+    <article class="case">
+      <div class="case-top">
+        <div>
+          <span class="kicker">UX research &middot; Team of 3</span>
+          <h3>YouTube Shorts: why people use it, and where it trips them up</h3>
+          <div class="role">USC &middot; Two linked studies &middot; <b>I analyzed the data and wrote the findings</b></div>
+        </div>
+        <div class="links-row">
+          <a class="doc" href="work/Poremba_YouTube-Shorts-Foundational.pdf" target="_blank" rel="noopener">Foundational study</a>
+          <a class="doc" href="work/Poremba_YouTube-Shorts-Usability.pdf" target="_blank" rel="noopener">Usability study</a>
+        </div>
+      </div>
+      <div class="grid3">
+        <div><h4>The question</h4><p>Shorts gets over a billion views a day but barely converts viewers to long-form. Why do people pick it, and can they get back to what they liked?</p></div>
+        <div><h4>What we did</h4><p>In-depth interviews with Shorts users and non-users, then a task-based usability test on saving and revisiting Shorts.</p></div>
+        <div><h4>What I found</h4><p>Platform choice follows existing habits. And the bottleneck is saving, not finding: Save is buried in a menu, and several participants didn't know it existed.</p></div>
+      </div>
+      <div class="sowhat"><b>So what:</b> put Save on the main Shorts sidebar and keep saved Shorts separate from long-form content.</div>
+    </article>
   </section>
+
   <section>
-    <h2>Leadership &amp; Awards</h2>
-    <div class="entry">
-      <div class="entry-title"><span>Outstanding Program Award</span><span>2021</span></div>
-      <div class="entry-sub">Associated Students of Foothill College</div>
-      <ul class="bullets">
-        <li>Conceptualized and led a social media campaign as VP/Social Media Manager, directing a 2-person team (research + design); awarded Outstanding Program by the Dean.</li>
-      </ul>
+    <div class="sec-head">
+      <h2>More work</h2>
+      <p>Strategy, organizational research, and data storytelling.</p>
     </div>
-  </section>
-  <section>
-    <h2>Selected Work Samples</h2>
-    <div class="samples-grid">
-      <a class="sample-card" href="Poremba_J_Infographic-JETBLUE.png" target="_blank" rel="noopener">
-        <div class="name">JetBlue / SAF Infographic</div>
-        <div class="desc">Live-presented data storytelling case, perfect grade</div>
+    <div class="more">
+      <a class="mini" href="work/Poremba_Spotify-Marketing-Plan.pdf" target="_blank" rel="noopener">
+        <span class="kicker">Marketing strategy</span>
+        <h3>Spotify marketing plan</h3>
+        <p>I pitched the project and wrote the full plan. The core finding: premium sells when it feels like protection for your listening routine, not a feature upgrade.</p>
+        <span class="go">Read the plan &#8599;</span>
       </a>
-      <a class="sample-card" href="SPOTIFY_MARKETING_PLAN.pdf" target="_blank" rel="noopener">
-        <div class="name">Spotify Marketing Plan</div>
-        <div class="desc">Original segmentation &amp; gap analysis, self-directed</div>
+      <a class="mini" href="work/Poremba_DEI-Training-White-Paper.pdf" target="_blank" rel="noopener">
+        <span class="kicker">Organizational research</span>
+        <h3>Why diversity training stalls</h3>
+        <p>I led the research and designed the paper. Training fails when it ignores how employees actually experience it, so the fix is a systems-level approach.</p>
+        <span class="go">Read the white paper &#8599;</span>
+      </a>
+      <a class="mini" href="work/Poremba_JetBlue-Infographic.png" target="_blank" rel="noopener">
+        <span class="kicker">Data storytelling &middot; Solo</span>
+        <h3>JetBlue and the fuel crisis</h3>
+        <p>Industry data turned into one recommendation: pair fuel hedging with sustainable aviation fuel. Lock in the price, then clean up the supply.</p>
+        <span class="go">View infographic &#8599;</span>
       </a>
     </div>
   </section>
-  <section>
-    <h2>Skills</h2>
-    <div class="skills-groups">
-      <div class="skills-group">
-        <span class="label">Research Methods</span>
-        <div class="pill-row">
-          <span class="pill">Experimental Design</span>
-          <span class="pill">Survey Design</span>
-          <span class="pill">Advanced quantitative methods</span>
-          <span class="pill">Qualitative Interviewing</span>
-          <span class="pill">Market Segmentation</span>
-          <span class="pill">Thematic Coding</span>
-          <span class="pill">Usability Testing</span>
-        </div>
+
+  <!-- FOUNDATIONS -->
+  <section id="foundations">
+    <div class="sec-head">
+      <h2>Background</h2>
+      <p>Where the affect and trust work started.</p>
+    </div>
+    <div class="found">
+      <div class="card">
+        <span class="kicker">Culture Impacts Emotion Lab &middot; Santa Clara University &middot; 2023 to present</span>
+        <h3>Avoided negative affect and perspective-taking</h3>
+        <ul>
+          <li>Designed an original study and won the nationally competitive Psi Chi Mamie Phipps Clark Diversity Research Grant (2024).</li>
+          <li>Presented at the Western Psychological Association (2024); led two follow-up studies and mentored the students who presented them in 2026.</li>
+          <li>Coded English and Spanish qualitative data for a published cross-cultural study of empathy.</li>
+          <li>Ran SPSS tutorials for classmates at USC.</li>
+        </ul>
+        <div class="foot">M.S. Applied Psychology, USC (Dec 2026) &middot; B.S. Psychology, Magna Cum Laude, Santa Clara University</div>
       </div>
-      <div class="skills-group">
-        <span class="label">Tools &amp; Languages</span>
-        <div class="pill-row">
-          <span class="pill">SPSS (syntax fluent)</span>
-          <span class="pill">RStudio (R fluent)</span>
-          <span class="pill">Qualtrics</span>
-          <span class="pill">Excel</span>
-          <span class="pill">Python</span>
-          <span class="pill">Web development (HTML, CSS, JS)</span>
-          <span class="pill">English (native)</span>
-          <span class="pill">Spanish (professional)</span>
-        </div>
-      </div>
-      <div class="skills-group">
-        <span class="label">Domains</span>
-        <div class="pill-row">
-          <span class="pill">Consumer Insights</span>
-          <span class="pill">UX Research</span>
-          <span class="pill">AI &amp; Trust</span>
-          <span class="pill">Behavioral Research</span>
-        </div>
+      <div class="card tools">
+        <div><span class="lbl">Qualitative</span><div class="meta"><span class="chip">In-depth interviews</span><span class="chip">Laddering</span><span class="chip">Ethnography</span><span class="chip">Usability testing</span><span class="chip">Bilingual coding</span></div></div>
+        <div><span class="lbl">Quantitative</span><div class="meta"><span class="chip">Experimental design</span><span class="chip">Survey design</span><span class="chip">PCA</span><span class="chip">Cluster analysis</span></div></div>
+        <div><span class="lbl">Tools</span><div class="meta"><span class="chip">SPSS syntax</span><span class="chip">R</span><span class="chip">Python</span><span class="chip">Qualtrics</span><span class="chip">Prolific</span><span class="chip">HTML/CSS/JS</span><span class="chip">Cloudflare</span></div></div>
+        <div><span class="lbl">Languages</span><div class="meta"><span class="chip">English</span><span class="chip">Spanish (professional)</span></div></div>
       </div>
     </div>
   </section>
-  <section class="cta">
-    <h2>Let's Talk</h2>
-    <p>Open to research and research-adjacent internships starting August 31st 2026. Grab time directly below.</p>
-    <!-- CALENDLY EMBED -->
-    <div id="calendly-embed">
-      <!-- Calendly inline widget begin -->
-      <div class="calendly-inline-widget" data-url="https://calendly.com/juliakporemba/meet" style="min-width:320px;height:700px;"></div>
-      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-      <!-- Calendly inline widget end -->
+
+  <section class="contact">
+    <h2>Have a question about your users?</h2>
+    <p>I'd like to help answer it. The fastest way to reach me is email, or grab a time below.</p>
+    <div class="btns">
+      <a class="btn solid" href="mailto:juliakporemba@gmail.com">juliakporemba@gmail.com</a>
+      <a class="btn" href="https://calendly.com/juliakporemba/meet" target="_blank" rel="noopener">Book a call</a>
+      <a class="btn" href="https://linkedin.com/in/juliaporemba" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </section>
-  <footer>
-    Last updated July 2026
-  </footer>
+
+  <footer>Julia Kioko Poremba &middot; Updated November 2026</footer>
 </div>
 </body>
 </html>
